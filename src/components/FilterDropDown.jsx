@@ -7,7 +7,7 @@ export const FilterDropDown = ({ topics, setTopicFilter }) => (
     >
       {
         topics.map(
-          ({ name, id }) => (<option key={name} id={id} name={name}>{name}</option>))
+          ({ topic, id }) => (<option key={id} id={id} name={topic}>{topic}</option>))
       }
     </select>
   </>

@@ -35,10 +35,10 @@ export const AllPostsList = () => {
     </div>
     {filterdPosts.map(
       ({ id, title, body, date, topic: {
-        name: topicName
+        topic: topicName
       },
         user: {
-          name: userName
+          fullName: userName
         }
       }) => (
         <Post
