@@ -30,23 +30,43 @@ export const NewPost = ({ localStorageUser }) => {
     }) : window.alert("Fill form")
   }
   return (
-    <div className=" mx-2 mt-12">
+    <div className="mx-2 mt-12">
       <div className="flex">
-        <form className="bg-green-800 m-auto mt-12 p-16 pt-2 pb-2 border-solid border-black border-8">
-          <h1>New Post</h1>
-          <fieldset className="fieldset">
-            <input onChange={({ target: { value } }) => { setTitle(value) }} type="text" placeholder="Enter Title"></input>
+        <form className="m-auto mt-12 p-8 shadow-lg bg-sky-700 rounded-lg">
+          <h1 className="text-2xl font-bold text-white mb-6">New Post</h1>
+          <fieldset className="mb-4">
+            <input
+              onChange={({ target: { value } }) => { setTitle(value) }}
+              type="text"
+              placeholder="Enter Title"
+              className="w-full p-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
           </fieldset>
-          <fieldset className="new-post-fieldset">
-            <select onChange={({ target: { value } }) => { setTopicId(value) }}>
-              {topics.map(({ topic, id }) => <option key={id} value={id}>{topic}</option>)}
+          <fieldset className="mb-4">
+            <select
+              onChange={({ target: { value } }) => { setTopicId(value) }}
+              className="w-full p-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            >
+              {topics.map(({ topic, id }) => (
+                <option key={id} value={id}>{topic}</option>
+              ))}
             </select>
           </fieldset>
-          <fieldset className="new-post-fieldset">
-            <textarea onChange={({ target: { value } }) => { setBody(value) }} className="post-body" type="text" rows={10} placeholder="Enter Data"></textarea>
+          <fieldset className="mb-4">
+            <textarea
+              onChange={({ target: { value } }) => { setBody(value) }}
+              className="w-full p-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              rows={10}
+              placeholder="Enter Data"
+            ></textarea>
           </fieldset>
-          <fieldset className="new-post-fieldset">
-            <button onClick={handlePost}>Post</button>
+          <fieldset>
+            <button
+              onClick={handlePost}
+              className="w-full p-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition duration-200"
+            >
+              Post
+            </button>
           </fieldset>
         </form>
       </div>

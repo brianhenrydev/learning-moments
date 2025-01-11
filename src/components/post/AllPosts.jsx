@@ -7,13 +7,13 @@ import { getPostTopics } from "../../services/topics/getPostTopics"
 export const AllPostsList = () => {
   const [posts, setPosts] = useState([])
   const [filterdPosts, setFilteredPosts] = useState([])
-  const [topicFilter, setTopicFilter] = useState([])
+  const [topicFilter, setTopicFilter] = useState("")
   const [searchFilter, setSearchFilter] = useState("")
   const [topics, setTopics] = useState([])
 
   useEffect(() => {
     getAllPosts().then((posts) => {
-      posts.reverse();
+      posts.reverse()
 
       setPosts(posts)
       setFilteredPosts(posts)
@@ -22,32 +22,37 @@ export const AllPostsList = () => {
   }, [])
 
   useEffect(() => {
-    setFilteredPosts(posts.filter(({ topic: { topic } }) => topic === topicFilter))
+    topicFilter === "All" ?
+      setFilteredPosts(posts)
+      :
+      setFilteredPosts(posts.filter(({ topic: { topic } }) => topic === topicFilter))
   }, [topicFilter])
 
   useEffect(() => {
     setFilteredPosts(posts.filter(({ title }) => title.toLowerCase().includes(searchFilter.toLowerCase())))
-  }, [searchFilter])
+  }, [searchFilter, posts])
 
   return (
-    <div className="flex-col ">
+    <div className="flex-col">
       <div className=" flex flex-row justify-evenly">
         <FilterDropDown topics={topics} setTopicFilter={setTopicFilter} />
         <FilterBar setSearchFilter={setSearchFilter} />
       </div>
-      {filterdPosts.map(
-        ({ id,
-          title,
-          topic: {
-            topic: topicName
-          }
-        }) => (
-          <Post
-            key={id}
-            id={id}
-            title={title}
-            topic={topicName}
-          />
-        ))}
+      <div className="">
+        {filterdPosts.map(
+          ({ id,
+            title,
+            topic: {
+              topic: topicName
+            }
+          }) => (
+            <Post
+              key={id}
+              id={id}
+              title={title}
+              topic={topicName}
+            />
+          ))}
+      </div>
     </div>)
 }
