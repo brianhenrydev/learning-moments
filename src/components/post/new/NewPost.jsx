@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import { getPostTopics } from "../../../services/topics/getPostTopics"
 import { useNavigate } from "react-router-dom"
 import { createNewPost } from "../../../services/posts/createNewPost"
+import PropTypes from "prop-types"
 
 export const NewPost = ({ localStorageUser }) => {
   const [user, setUser] = useState({})
@@ -72,4 +73,8 @@ export const NewPost = ({ localStorageUser }) => {
       </div>
     </div>
   )
+}
+
+NewPost.propTypes = {
+  localStorageUser: PropTypes.object.isRequired
 }
