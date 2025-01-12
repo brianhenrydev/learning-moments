@@ -26,7 +26,7 @@ export const AllPostsList = () => {
       setFilteredPosts(posts)
       :
       setFilteredPosts(posts.filter(({ topic: { topic } }) => topic === topicFilter))
-  }, [topicFilter])
+  }, [topicFilter, posts])
 
   useEffect(() => {
     setFilteredPosts(posts.filter(({ title }) => title.toLowerCase().includes(searchFilter.toLowerCase())))

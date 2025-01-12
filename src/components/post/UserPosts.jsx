@@ -6,17 +6,17 @@ import { deletePost } from "../../services/posts/deletePost"
 
 export const UserPosts = ({ localStorageUser }) => {
   const [userPosts, setUserPosts] = useState([])
-  const gASUsers = () => {
+  const gASUserPosts = () => {
     getAllPosts().then((posts) => {
       setUserPosts(posts.filter((post) => post.userId === localStorageUser.id).reverse())
     })
   }
   useEffect(() => {
-    gASUsers()
+    gASUserPosts()
 
   }, [localStorageUser])
   const handleDelete = (postId) => {
-    deletePost(postId).then(() => gASUsers())
+    deletePost(postId).then(() => gASUserPosts())
   }
 
 
@@ -28,17 +28,21 @@ export const UserPosts = ({ localStorageUser }) => {
           title,
         }
         ) => (
-          <div key={id} id={id} className=" flex justify-evenly m-10 border-8 border-solid border-green-800 p-10">
-            <div>
-              <Link to={`/posts/${id}`}>
-                <div className="">{title}</div>
-              </Link>
-            </div>
-            <div className="float-right">
-              <button onClick={() => {
-                handleDelete(id)
-              }}>Delete me</button>
+          <div key={id} className="shadow-lg  bg-gray-700 rounded-2xl">
+            <div id={id}
+              className="m-3 p-6  drop-shadow-2xl flex justify-between">
 
+              <div>
+                <Link to={`/posts/${id}`}>
+                  <div className=" text-blue-300 hover:text-blue-200">{title}</div>
+                </Link>
+              </div>
+              <div className="hover:text-red-400 text-red-500 float-right ">
+                <button onClick={() => {
+                  handleDelete(id)
+                }}>Delete me</button>
+
+              </div>
             </div>
           </div>
         ))}

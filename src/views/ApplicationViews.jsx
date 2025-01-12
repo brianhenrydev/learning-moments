@@ -5,6 +5,7 @@ import { NavBar } from "../components/nav/NavBar"
 import { PostDetails } from "../components/post/PostDetails"
 import { NewPost } from "../components/post/new/NewPost"
 import { UserPosts } from "../components/post/UserPosts"
+import { EditPost } from "../components/post/EditPost"
 
 export const ApplicationViews = () => {
   const [user, setUser] = useState({})
@@ -23,8 +24,9 @@ export const ApplicationViews = () => {
 
         <Route path="posts">
           <Route index element={<AllPostsList />} />
-          <Route path=":postId" element={<PostDetails user={user} />}>
-          </Route>
+          <Route path=":postId" element={<PostDetails localStorageUser={user} />} />
+          <Route path="edit/:postId" element={<EditPost />} />
+
 
 
         </Route>

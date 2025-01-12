@@ -1,42 +1,48 @@
 import { useEffect, useState } from "react"
-import { getPostTopics } from "../../../services/topics/getPostTopics"
-import { useNavigate } from "react-router-dom"
-import { createNewPost } from "../../../services/posts/createNewPost"
+import { useNavigate, useParams } from "react-router-dom"
+import { getPostById } from "../../services/posts/getPostById"
+import { getPostTopics } from "../../services/topics/getPostTopics"
+import { editUserPost } from "../../services/posts/editPost"
 
-export const NewPost = ({ localStorageUser }) => {
-  const [user, setUser] = useState({})
-  const [title, setTitle] = useState("")
+export const EditPost = () => {
+  const [post, setPost] = useState({})
   const [topics, setTopics] = useState([])
-  const [topicId, setTopicId] = useState(0)
-  const [body, setBody] = useState("")
+  const { postId } = useParams()
   const nav = useNavigate()
 
   useEffect(() => {
-    setUser(localStorageUser)
+    getPostById(postId).then((post) => setPost(post))
     getPostTopics().then(topics => setTopics(topics))
-  }, [localStorageUser])
+  }, [postId])
 
-  const handlePost = (e) => {
-    e.preventDefault()
-    title && user && topicId && body ? createNewPost({
-      title: title,
-      userId: user.id,
-      topicId: topicId,
-      date: new Date(),
-      body: body
-    }
-    ).then(() => {
-      nav("/")
-    }) : window.alert("Fill form")
+  const handleChange = ({ target }) => {
+    const { name, value } = target
+    setPost({
+      ...post,
+      [name]: value
+    })
   }
+  const handleEdit = (e) => {
+    e.preventDefault()
+    post.title && post.topicId && post.body ?
+      editUserPost({ ...post }).then(() => {
+        nav("my-posts")
+      })
+      :
+      window.alert("fill in fields")
+
+  }
+
   return (
-    <div className="mx-2 mt-12">
+    <div className="w-full">
       <div className="flex">
         <form className="m-auto w-3/4 p-11 shadow-lg bg-gray-700 rounded-lg">
-          <h1 className="text-2xl font-bold mb-6 text-blue-600">New Post</h1>
+          <h1 className="text-2xl font-bold text-white mb-6">Edit Post</h1>
           <fieldset className="mb-4">
             <input
-              onChange={({ target: { value } }) => { setTitle(value) }}
+              name="title"
+              value={post.title ? post.title : ""}
+              onChange={handleChange}
               type="text"
               placeholder="Enter Title"
               className="w-full p-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -44,7 +50,9 @@ export const NewPost = ({ localStorageUser }) => {
           </fieldset>
           <fieldset className="mb-4">
             <select
-              onChange={({ target: { value } }) => { setTopicId(value) }}
+              name="topicId"
+              value={post.topicId ? post.topicId : ""}
+              onChange={handleChange}
               className="w-full p-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
             >
               {topics.map(({ topic, id }) => (
@@ -54,18 +62,19 @@ export const NewPost = ({ localStorageUser }) => {
           </fieldset>
           <fieldset className="mb-4">
             <textarea
-              onChange={({ target: { value } }) => { setBody(value) }}
+              name="body"
+              value={post.body ? post.body : ""}
+              onChange={handleChange}
               className="w-full p-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
               rows={10}
-              placeholder="Enter Data"
             ></textarea>
           </fieldset>
           <fieldset>
             <button
-              onClick={handlePost}
+              onClick={handleEdit}
               className="w-full p-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition duration-200"
             >
-              Post
+              Submit Edit
             </button>
           </fieldset>
         </form>
@@ -73,3 +82,6 @@ export const NewPost = ({ localStorageUser }) => {
     </div>
   )
 }
+
+
+

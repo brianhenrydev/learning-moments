@@ -6,6 +6,7 @@ import { getPostLikes } from "../../services/posts/getPostLikes"
 
 export const Post = ({ id, title, topic }) => {
   const [likes, setLikes] = useState([])
+
   const getAndSetLikes = useCallback(() => {
     getPostById(id).then((post) => {
       getPostLikes(id).then((likes) => {
@@ -18,7 +19,7 @@ export const Post = ({ id, title, topic }) => {
 
   }, [getAndSetLikes])
   return (
-    <div id={id} className="bg-gray-700 m-3 p-6 rounded-2xl shadow-lg  drop-shadow-2xl hover:translate-x-2 translate-y-3">
+    <div id={id} className="bg-gray-700 m-3 p-6 rounded-2xl shadow-lg  drop-shadow-2xl hover:translate-x-2 hover:translate-y-3">
       <Link key={id} to={`/posts/${id}`}>
         <div className="text-3xl text-cyan-200 font-mono">{title}</div>
       </Link>
