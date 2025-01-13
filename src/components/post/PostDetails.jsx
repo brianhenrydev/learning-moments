@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 import PropTypes from "prop-types"
 import { Link } from "react-router-dom"
 import { getPostById } from "../../services/posts/getPostById"
@@ -9,17 +9,25 @@ import { likePost } from "../../services/posts/likePost"
 export const PostDetails = ({ localStorageUser }) => {
   const { postId } = useParams()
   const [post, setPost] = useState({})
+  const [likes, setLikes] = useState([])
+  const nav = useNavigate()
 
 
-  const handleLike = () =>
-    likePost({ userId: localStorageUser.id, postId: post.id }).then(
-      () => {
-        getAndSetLikes()
-      }
-    )
+  const handleLike = () => {
+    likes.find(like => like.userId === localStorageUser.id) ?
+      window.alert("You have already liked this post")
+      :
+      likePost({ userId: localStorageUser.id, postId: post.id }).then(
+        () => {
+          getAndSetLikes()
+          nav("/favorites")
+        }
+      )
+  }
   const getAndSetLikes = useCallback(() => {
     getPostById(postId).then((post) => {
       getPostLikes(postId).then((likes) => {
+        setLikes(likes)
         setPost({
           ...post,
           likes: likes.filter((like) => like.postId === post.id).length
@@ -44,7 +52,7 @@ export const PostDetails = ({ localStorageUser }) => {
     hover:translate-x-2
     hover:translate-y-3">
       <div className="text-3xl text-cyan-200 font-mono">{post ? post.title : ""}</div>
-      <Link to=""><div className="text-red-300">{post ? post.user?.name : ""}</div></Link>
+      <Link to={`/profile/${post.user?.id}`}><div className="text-red-300">{post ? post.user?.name : ""}</div></Link>
       <div className="text-blue-400">{post ? post.topic?.topic : ""}</div>
       <div className="text-blue-400">{post ? post.date : ""}</div>
       <div className="text-blue-200">{post ? post.body : ""}</div>

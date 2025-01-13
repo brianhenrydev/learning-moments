@@ -1,7 +1,6 @@
 import React, { useState } from "react"
 import { Link } from "react-router-dom"
 import { useNavigate } from "react-router-dom"
-import "./Login.css"
 import { getUserByEmail } from "../../services/userService"
 
 export const Login = () => {
@@ -29,35 +28,45 @@ export const Login = () => {
   }
 
   return (
-    <main className="auth-container">
-      <section>
-        <form className="auth-form" onSubmit={handleLogin}>
-          <h1 className="header">Learning Moments</h1>
-          <h2>Please sign in</h2>
-          <fieldset className="auth-fieldset">
-            <div>
-              <input
-                type="email"
-                value={email}
-                className="auth-form-input"
-                onChange={(evt) => set(evt.target.value)}
-                placeholder="Email address"
-                required
-                autoFocus
-              />
-            </div>
-          </fieldset>
-          <fieldset className="auth-fieldset">
-            <div>
-              <button type="submit">Sign in</button>
-            </div>
-          </fieldset>
-        </form>
-      </section>
-      <section className="register-link">
-        <Link to="/register">Not a member yet?</Link>
-      </section>
+    <main className="w-full">
+      <div className="flex ">
+        <section
+          className="m-auto w-1/4 mt-20 p-11 shadow-lg bg-gray-700 rounded-lg">
+          <form className="auth-form" onSubmit={handleLogin}>
+            <h1 className="text-blue-200 font-bold text-4xl">Learning Moments</h1>
+            <h2
+              className="text-blue-500"
+            >Please sign in</h2>
+            <fieldset className="auth-fieldset">
+              <div>
+                <input
+                  className="w-full p-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  type="email"
+                  value={email}
+                  onChange={(evt) => set(evt.target.value)}
+                  placeholder="Email address"
+                  required
+                  autoFocus
+                />
+              </div>
+            </fieldset>
+            <fieldset >
+              <div>
+                <button
+                  className="w-full mt-2 p-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition duration-200"
+                  type="submit">Sign in</button>
+              </div>
+            </fieldset>
+          </form>
+          <section className="register-link">
+            <Link
+              className="hover:text-red-300  text-red-500"
+              to="/register">Not a member yet?</Link>
+          </section>
+        </section>
+      </div>
     </main>
   )
 }
+
 

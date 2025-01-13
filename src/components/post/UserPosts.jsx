@@ -1,20 +1,20 @@
 
-import { useEffect, useState } from "react"
+import { useEffect, useState, useCallback } from "react"
 import { getAllPosts } from "../../services/posts/getAllPosts"
 import { Link } from "react-router-dom"
 import { deletePost } from "../../services/posts/deletePost"
 
 export const UserPosts = ({ localStorageUser }) => {
   const [userPosts, setUserPosts] = useState([])
-  const gASUserPosts = () => {
+  const gASUserPosts = useCallback(() => {
     getAllPosts().then((posts) => {
       setUserPosts(posts.filter((post) => post.userId === localStorageUser.id).reverse())
     })
-  }
+  }, [localStorageUser.id])
   useEffect(() => {
     gASUserPosts()
 
-  }, [localStorageUser])
+  }, [localStorageUser, gASUserPosts])
   const handleDelete = (postId) => {
     deletePost(postId).then(() => gASUserPosts())
   }

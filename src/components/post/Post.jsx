@@ -29,7 +29,7 @@ export const Post = ({ id, title, topic }) => {
       <div className="">
         <div className="justify-self-end text-cyan-200 flex row-auto">
           <i className="fa-regular fa-heart text-blue-500 text-2xl hover:fa-solid hover:text-red-300 " />
-          <div className="mx-2">{likes}</div>
+          <div className="mx-2 mt-1">{likes}</div>
         </div>
 
       </div>

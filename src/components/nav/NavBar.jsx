@@ -13,16 +13,20 @@ export const NavBar = () => {
           <li className="text-white hover:text-blue-500">
             <Link to="/my-posts">My posts</Link>
           </li>
-          <li>
-            Favorites
+          <li className="text-white hover:text-blue-500">
+            <Link to="/favorites">
+              Favorites
+            </Link>
           </li>
           <li className="text-white hover:text-blue-500">
             <Link to={"/new-post"}>
               New Post
             </Link>
           </li>
-          <li>
-            Profile
+          <li className="text-white hover:text-blue-500">
+            <Link to={"/profile"}>
+              Profile
+            </Link>
           </li>
           {localStorage.getItem("learning_user") ? (
             <li className="text-white hover:text-blue-500">

@@ -1,9 +1,8 @@
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
-import "./Login.css"
 import { createUser, getUserByEmail } from "../../services/userService"
 
-export const Register = (props) => {
+export const Register = () => {
   const [user, setUser] = useState({
     email: "",
     fullName: "",
@@ -52,52 +51,70 @@ export const Register = (props) => {
   }
 
   return (
-    <main className="auth-container">
-      <form className="auth-form" onSubmit={handleRegister}>
-        <h1 className="header">Learning Moments</h1>
-        <h2>Please Register</h2>
+    <main className="w-full flex">
+      <form className="
+        m-auto
+        mt-20
+        w-1/4
+        p-11
+        shadow-lg
+        bg-gray-700
+        rounded-lg" onSubmit={handleRegister}>
+        <h1
+          className="text-4xl
+          text-blue-500
+          text-center">Learning Moments</h1>
+        <h2
+          className="text-blue-400"
+        >Please Register</h2>
+        <div >
+          <fieldset className="mb-2">
+            <div
+              className="">
+              <input
+                onChange={updateUser}
+                type="text"
+                id="fullName"
+                className="w-full p-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                placeholder="Enter your name"
+                required
+                autoFocus
+              />
+            </div>
+          </fieldset>
+          <fieldset className="mb-2">
+            <div>
+              <input
+                onChange={updateUser}
+                type="email"
+                id="email"
+                className="w-full p-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                placeholder="Email address"
+                required
+              />
+            </div>
+          </fieldset>
+          <fieldset className="auth-fieldset">
+            <div>
+              <input
+                onChange={updateUser}
+                type="number"
+                id="cohort"
+                className="w-full p-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                placeholder="Cohort #"
+                required
+              />
+            </div>
+          </fieldset>
+        </div>
         <fieldset className="auth-fieldset">
           <div>
-            <input
-              onChange={updateUser}
-              type="text"
-              id="fullName"
-              className="auth-form-input"
-              placeholder="Enter your name"
-              required
-              autoFocus
-            />
+            <button
+              className="w-full mt-2 p-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition duration-200"
+              type="submit">Register</button>
           </div>
         </fieldset>
-        <fieldset className="auth-fieldset">
-          <div>
-            <input
-              onChange={updateUser}
-              type="email"
-              id="email"
-              className="auth-form-input"
-              placeholder="Email address"
-              required
-            />
-          </div>
-        </fieldset>
-        <fieldset className="auth-fieldset">
-          <div>
-            <input
-              onChange={updateUser}
-              type="number"
-              id="cohort"
-              className="auth-form-input"
-              placeholder="Cohort #"
-              required
-            />
-          </div>
-        </fieldset>
-        <fieldset className="auth-fieldset">
-          <div>
-            <button type="submit">Register</button>
-          </div>
-        </fieldset>
+
       </form>
     </main>
   )
