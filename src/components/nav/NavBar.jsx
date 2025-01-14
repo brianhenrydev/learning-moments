@@ -8,7 +8,7 @@ export const NavBar = () => {
         <ul className="relative flex h-12 items-center justify-between px-3 ">
           <li className="text-white hover:text-blue-500  ">
             <Link to="/posts"
-              className=""> All Posts</Link>
+              className="text-blue-300"> All Posts</Link>
           </li>
           <li className="text-white hover:text-blue-500">
             <Link to="/my-posts">My posts</Link>
@@ -30,7 +30,9 @@ export const NavBar = () => {
           </li>
           {localStorage.getItem("learning_user") ? (
             <li className="text-white hover:text-blue-500">
-              <Link to=""
+              <Link
+                className="text-red-500 font-semibold"
+                to=""
                 onClick={() => {
                   localStorage.removeItem("learning_user")
                   nav("/login", { replace: true })

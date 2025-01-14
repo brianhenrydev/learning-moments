@@ -3,9 +3,6 @@
 @tailwind utilities;
 
 
-:root {
-  background-color: #283953;
-}
 
 
 @layer components {

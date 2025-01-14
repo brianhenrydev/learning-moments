@@ -9,6 +9,7 @@ import { EditPost } from "../components/post/EditPost"
 import { FavoritePosts } from "../components/post/FavoritePosts"
 import { Profile } from "../components/profile/Profile"
 import { ProfileEdit } from "../components/forms/ProfileEdit"
+import { useRoutes } from "react-router-dom"
 
 export const ApplicationViews = () => {
   const [user, setUser] = useState({})
@@ -46,4 +47,48 @@ export const ApplicationViews = () => {
     </Routes >
   </>)
 
+}
+
+
+export const UseRoutesApplicationView = () => {
+  const [user, setUser] = useState({})
+  useEffect(() => {
+    setUser(JSON.parse(localStorage.getItem("learning_user")))
+  }, [])
+
+  const routes = useRoutes([
+    {
+      path: '/',
+      element: (
+        <>
+          <NavBar />
+          <Outlet />
+        </>
+      ),
+      children: [
+        { index: true, element: <AllPostsList /> },
+        {
+          path: 'posts',
+          children: [
+            { index: true, element: <AllPostsList /> },
+            { path: ':postId', element: <PostDetails localStorageUser={user} /> },
+            { path: 'edit/:postId', element: <EditPost /> },
+          ],
+        },
+        {
+          path: 'profile',
+          children: [
+            { index: true, element: <Profile localStorageUser={user} /> },
+            { path: ':userId', element: <Profile localStorageUser={user} /> },
+            { path: 'edit', element: <ProfileEdit /> },
+          ],
+        },
+        { path: 'new-post', element: <NewPost localStorageUser={user} /> },
+        { path: 'my-posts', element: <UserPosts localStorageUser={user} /> },
+        { path: 'favorites', element: <FavoritePosts localStorageUser={user} /> },
+      ],
+    },
+  ]);
+
+  return routes;
 }
