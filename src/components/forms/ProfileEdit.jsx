@@ -34,7 +34,7 @@ export const ProfileEdit = () => {
     <div className="w-full">
       <div className="flex">
         <form className="m-auto w-3/4 p-11 shadow-lg bg-gray-700 rounded-lg">
-          <h1 className="text-2xl font-bold text-white mb-6">Edit Profile</h1>
+          <h1 className="text-2xl font-bold text-red-400 mb-6">Edit Profile</h1>
           <fieldset className="mb-4">
             <h3 className="text-blue-300">Enter Full Name</h3>
             <input
@@ -43,7 +43,7 @@ export const ProfileEdit = () => {
               placeholder="Enter Full Name"
               value={userObj.name ? userObj.name : ""}
               onChange={handleChange}
-              className="w-full p-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="input"
             />
           </fieldset>
           <fieldset className="mb-4">
@@ -54,12 +54,12 @@ export const ProfileEdit = () => {
               value={userObj.cohort ? userObj.cohort : ""}
               onChange={handleChange}
               placeholder="cohort #"
-              className="w-full p-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="input"
             />
           </fieldset>
           <fieldset>
             <button
-              className="w-full p-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition duration-200"
+              className="btn-submit"
               onClick={handleSubmit}
             >
               Submit Edit

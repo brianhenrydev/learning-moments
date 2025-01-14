@@ -3,6 +3,9 @@
 @tailwind utilities;
 
 
+:root {
+  background-color: #283953;
+}
 
 
 @layer components {
@@ -16,5 +19,9 @@
 
   .btn-blue {
     @apply w-full mt-2 p-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition duration-200;
+  }
+
+  .btn-submit {
+    @apply w-full p-2 bg-blue-500 text-white rounded-md hover:bg-blue-700 transition duration-200;
   }
 }

@@ -26,7 +26,7 @@ export const Profile = ({ localStorageUser }) => {
           <div>
             <div className="text-blue-300">Name: {user.name}</div>
             <div className="text-blue-300">Cohort: {user.cohort}</div>
-            <div className="text-blue-300">Posts #: {userPosts.length}</div>
+            <div className="text-blue-300"># Posts: {userPosts.length}</div>
             {
               localStorageUser.id === profileUserId ?
                 <Link
