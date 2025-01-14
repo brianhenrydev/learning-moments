@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
-import { createUser, getUserByEmail } from "../../services/userService"
+import { getUserByEmail } from "../../services/users/getUserByEmail"
+import { createUser } from "../../services/users/createUser"
 
 export const Register = () => {
   const [user, setUser] = useState({
@@ -52,14 +53,7 @@ export const Register = () => {
 
   return (
     <main className="w-full flex">
-      <form className="
-        m-auto
-        mt-20
-        w-1/4
-        p-11
-        shadow-lg
-        bg-gray-700
-        rounded-lg" onSubmit={handleRegister}>
+      <form className="floating-form" onSubmit={handleRegister}>
         <h1
           className="text-4xl
           text-blue-500
@@ -75,7 +69,7 @@ export const Register = () => {
                 onChange={updateUser}
                 type="text"
                 id="fullName"
-                className="w-full p-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="input"
                 placeholder="Enter your name"
                 required
                 autoFocus
@@ -88,7 +82,7 @@ export const Register = () => {
                 onChange={updateUser}
                 type="email"
                 id="email"
-                className="w-full p-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="input"
                 placeholder="Email address"
                 required
               />
@@ -100,7 +94,7 @@ export const Register = () => {
                 onChange={updateUser}
                 type="number"
                 id="cohort"
-                className="w-full p-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="input"
                 placeholder="Cohort #"
                 required
               />
@@ -110,7 +104,7 @@ export const Register = () => {
         <fieldset className="auth-fieldset">
           <div>
             <button
-              className="w-full mt-2 p-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition duration-200"
+              className="btn-blue"
               type="submit">Register</button>
           </div>
         </fieldset>

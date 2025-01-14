@@ -6,3 +6,18 @@
 :root {
   background-color: #283953;
 }
+
+
+@layer components {
+  .floating-form {
+    @apply m-auto sm:w-3/4 md:w-1/2 lg:w-1/4 mt-72 p-11 shadow-lg bg-gray-700 rounded-lg;
+  }
+
+  .input {
+    @apply w-full p-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500;
+  }
+
+  .btn-blue {
+    @apply w-full mt-2 p-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition duration-200;
+  }
+}

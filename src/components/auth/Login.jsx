@@ -1,7 +1,7 @@
-import React, { useState } from "react"
+import { useState } from "react"
 import { Link } from "react-router-dom"
 import { useNavigate } from "react-router-dom"
-import { getUserByEmail } from "../../services/userService"
+import { getUserByEmail } from "../../services/users/getUserByEmail"
 
 export const Login = () => {
   const [email, set] = useState("")
@@ -31,7 +31,7 @@ export const Login = () => {
     <main className="w-full">
       <div className="flex ">
         <section
-          className="m-auto w-1/4 mt-20 p-11 shadow-lg bg-gray-700 rounded-lg">
+          className="floating-form">
           <form className="auth-form" onSubmit={handleLogin}>
             <h1 className="text-blue-200 font-bold text-4xl">Learning Moments</h1>
             <h2
@@ -40,7 +40,7 @@ export const Login = () => {
             <fieldset className="auth-fieldset">
               <div>
                 <input
-                  className="w-full p-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="input"
                   type="email"
                   value={email}
                   onChange={(evt) => set(evt.target.value)}
@@ -53,7 +53,7 @@ export const Login = () => {
             <fieldset >
               <div>
                 <button
-                  className="w-full mt-2 p-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition duration-200"
+                  className="btn-blue"
                   type="submit">Sign in</button>
               </div>
             </fieldset>
